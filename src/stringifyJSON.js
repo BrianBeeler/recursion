@@ -4,46 +4,43 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-  // your code goes here
-  if (typeof(obj)!=="object" || obj===null) {
-  	return String(obj)===obj ? '"'+obj+'"' : String(obj)
-  }
-  
+  // Stringy will be the resultant stringified obj;
   var stringy=""
 
-  if (Array.isArray(obj)) {
-  	for (var i=0;i<obj.length;i++) {
-  		if (typeof obj[i]!==obj) {
-  			if (i==0) { 
-  				stringy+="["+obj[i]+","
-  				}
-  			else if (i!==obj.length-1) {
-  				stringy+=obj[i]+","    
-  				}
-  			else {
-  				stringy+=obj[i]+"]"
-  				}
-  		}
-  		else {
-  			stringy=stringy+stringifyJSON(obj[i])
-  		}
-  	} 
-  } 
-
+  // Converts non-objects to appropriate string form
+  if (typeof(obj)!=="object" || obj===null) {
+  	stringy+=(""+obj===obj ?'"'+obj+'"': obj)
+  }  
   else {
-  	stringy+="{"
-  	for (var key in obj) {
-  		if (typeof obj[key]!==obj) {
-  			stringy+=key+":"+obj[key]+","
+  	// Stringifies arrays including contents recursively
+	if (Array.isArray(obj)) {
+  		stringy+="["
+		for (var i=0;i<obj.length;i++) {
+			stringy += stringifyJSON(obj[i])+",";  		}
+ 		if (stringy[stringy.length-1]===",") { 
+			stringy=stringy.substring(0,stringy.length-1); 
+		}
+		stringy+="]"; console.log(stringy)
+	} 
+  
+  	// Stringifies keys and properties recursively
+  	else {
+  		stringy+="{"
+  		for (var key in obj) {
+  			if ( typeof obj[key] !== "function" && typeof obj[key]!== "undefined") {
+  			stringy+=stringifyJSON(key)+":"+stringifyJSON(obj[key])+","
+  			}
   		}
-  		else {
-  			stringy+=key+":"+stringifyJSON(obj[key])+","
-  		}
+  		if (stringy[stringy.length-1]===",") { 
+			stringy=stringy.substring(0,stringy.length-1); 
+		}
+		stringy+="}"; console.log(stringy)
   	}
-  	stringy=stringy.substring(0,stringy.length-1)+"}"
   }
 
-  return stringifyJSON(stringy)
-
+  
+// Base case occurs when all loops have ran 
+return stringy
 }
+
 
