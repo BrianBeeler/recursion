@@ -5,8 +5,8 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
-  if (typeof(obj)!=="object") {
-  	return String(obj)
+  if (typeof(obj)!=="object" || obj===null) {
+  	return String(obj)===obj ? '"'+obj+'"' : String(obj)
   }
   
   var stringy=""
