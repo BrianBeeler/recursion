@@ -1,0 +1,30 @@
+ /*  	
+   	result=[]
+    function getElements(parent,className) {
+
+    	console.log(parent.childNodes)
+    	
+    	if (!parent.childNodes) {
+    		
+    		return result;
+    	}   
+    	var children = parent.childNodes
+    	var classes = []
+    	for (var i in children) {
+    		classes=children[i].classList
+    		for (var j in classes) {
+    			console.log(classes[j])
+    			if (classes[j]===className) {
+    				//console.log("Hey!")
+    				result=result.push(children[i])
+    			}
+    		}
+    		getElements(children[i])
+    	}
+    	console.log(result)	
+    	
+    	return result	
+    }
+
+    return getElements(document,className)
+};

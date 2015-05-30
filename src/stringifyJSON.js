@@ -20,7 +20,7 @@ var stringifyJSON = function(obj) {
  		if (stringy[stringy.length-1]===",") { 
 			stringy=stringy.substring(0,stringy.length-1); 
 		}
-		stringy+="]"; console.log(stringy)
+		stringy+="]"; 
 	} 
   
   	// Stringifies keys and properties recursively
@@ -34,7 +34,7 @@ var stringifyJSON = function(obj) {
   		if (stringy[stringy.length-1]===",") { 
 			stringy=stringy.substring(0,stringy.length-1); 
 		}
-		stringy+="}"; console.log(stringy)
+		stringy+="}"; 
   	}
   }
 
